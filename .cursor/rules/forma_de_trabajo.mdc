@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+# Onboarding
+- **Proyecto:** Clon de X (Twitter).
+- **Stack:** ReactJS (Vite), Tailwind, Supabase.
+- **Gestor de Paquetes:** npm.
+- **Estructura:**
+  - `/app`: Aplicación final: El frontend principal.
+  - `/api`: API del backend.
+
+# Comandos Críticos
+- **Setup:** `npm install`
+- **Dev:** `npm run dev` (Inicia todos los servicios).
+- **Test:** `npm run test` (Ejecuta tests en todo el workspace).
+- **DB:** `npm run supabase:gen` (Generar tipos tras migración).
+
+# Reglas de Agente
+1. **Tool & Skill Discovery:** Antes de planificar, revisa tus herramientas y Skills disponibles. Si existe una Skill específica para la tarea (ej. generar migraciones, refactorizar), úsala prioritariamente para asegurar consistencia.
+2. **Verificación:** Crea un test de reproducción antes de arreglar bugs complejos.
+3. **Estilo:** Si el linter falla, corrígelo. No inventes reglas de estilo, sigue la config existente.
+
+# Principios de Implementación
+1. **DRY:** No repitas código; abstrae lógica reutilizable.
+2. **Simplicidad primero:** Evita la sobre-ingeniería. La solución más simple suele ser la correcta.
+3. **TDD Pragmatico:** Escribe los tests (o al menos define los casos de prueba) antes de escribir la implementación.

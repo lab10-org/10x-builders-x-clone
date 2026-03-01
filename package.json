@@ -1,0 +1,18 @@
+{
+  "name": "x-clone-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "app",
+    "api"
+  ],
+  "scripts": {
+    "dev": "concurrently -n app,api -c cyan,magenta \"npm run dev -w app\" \"npm run dev -w api\"",
+    "test": "npm run test -ws --if-present",
+    "lint": "npm run lint -ws --if-present",
+    "supabase:gen": "supabase gen types typescript --local > app/src/lib/database.types.ts"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
