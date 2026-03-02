@@ -1,11 +1,30 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { MemoryRouter } from "react-router-dom";
+import { describe, expect, it, vi } from "vitest";
 import App from "../App";
 
-describe("App", () => {
-  it("renders project heading", () => {
-    render(<App />);
+const authApi = vi.hoisted(() => ({
+  getSession: vi.fn().mockResolvedValue({ data: { session: null } }),
+  onAuthStateChange: vi.fn().mockReturnValue({
+    data: { subscription: { unsubscribe: vi.fn() } },
+  }),
+}));
 
-    expect(screen.getByRole("heading", { name: /x clone/i })).toBeInTheDocument();
+vi.mock("../lib/supabase", () => ({
+  getSupabaseClient: () => ({
+    auth: authApi,
+  }),
+}));
+
+describe("App", () => {
+  it("renders project heading", async () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: /x clone/i })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: /entrar/i })).toBeInTheDocument();
   });
 });
