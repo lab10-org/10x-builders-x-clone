@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "workspaces": [
     "app",
-    "api"
+    "api",
+    "mcp"
   ],
   "scripts": {
     "dev": "concurrently -n app,api -c cyan,magenta \"npm run dev -w app\" \"npm run dev -w api\"",
