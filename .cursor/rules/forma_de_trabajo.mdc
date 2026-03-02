@@ -21,6 +21,13 @@ alwaysApply: true
 2. **Verificación:** Crea un test de reproducción antes de arreglar bugs complejos.
 3. **Estilo:** Si el linter falla, corrígelo. No inventes reglas de estilo, sigue la config existente.
 
+# Flujo de Implementación
+El flujo obligatorio de trabajo para cualquier implementación debe ser:
+1. **Modo planeación**
+2. **Implementación**
+3. **Llamar el subagente de QA** (`qa-implementation-reviewer`)
+4. **Llamar el subagente de code review** (`secure-code-reviewer`)
+
 # Principios de Implementación
 1. **DRY:** No repitas código; abstrae lógica reutilizable.
 2. **Simplicidad primero:** Evita la sobre-ingeniería. La solución más simple suele ser la correcta.
