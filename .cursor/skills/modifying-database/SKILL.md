@@ -22,13 +22,18 @@ Aplicar automaticamente cuando el usuario pida:
 
 ### 1) Crear archivo de migracion
 
-Generar la migracion con:
+Generar la migracion en modo no interactivo con:
 
 ```bash
-supabase migration new nombre_migracion
+supabase migration new nombre_migracion --yes
 ```
 
 Esto crea un archivo SQL nuevo en el directorio de migraciones de Supabase.
+
+Regla obligatoria para agentes:
+
+- usar siempre `--yes` para evitar prompts interactivos que puedan dejar el comando colgado
+- en ejecucion automatizada, preferir tambien `CI=1` (por ejemplo: `CI=1 supabase migration new nombre_migracion --yes`)
 
 ### 2) Escribir el cambio de base de datos
 
@@ -60,6 +65,6 @@ Despues del reset, volver a validar que la base levanta con las migraciones espe
 
 ## Checklist rapido
 
-- [ ] Crear migracion con `supabase migration new nombre_migracion`
+- [ ] Crear migracion con `supabase migration new nombre_migracion --yes`
 - [ ] Escribir SQL en el archivo creado
 - [ ] Ejecutar `supabase migration up`
