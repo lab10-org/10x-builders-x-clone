@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useTimeline } from "../hooks/useTimeline";
 import { TweetCard } from "../components/TweetCard";
 import { TweetComposer } from "../components/TweetComposer";
+import { EditProfileModal } from "../components/EditProfileModal";
 import { buildHomeTimelineTitle } from "../lib/timeline";
 
 export function HomePage() {
-  const { user, signOut } = useAuth();
+  const { user, profile, signOut, updateProfile } = useAuth();
   const { tweets, loading, error, refetch } = useTimeline();
+  const [editingProfile, setEditingProfile] = useState(false);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -17,9 +20,13 @@ export function HomePage() {
             {buildHomeTimelineTitle(tweets.length)}
           </h1>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-400 truncate max-w-[140px]">
-              {user?.email}
-            </span>
+            <button
+              onClick={() => setEditingProfile(true)}
+              className="text-sm text-gray-400 truncate max-w-[140px] hover:text-white transition text-left"
+              title="Editar perfil"
+            >
+              {profile?.display_name ?? user?.email}
+            </button>
             <button
               onClick={() => void signOut()}
               className="rounded-full border border-gray-700 px-4 py-1.5 text-sm font-medium text-white hover:bg-white/10 transition"
@@ -28,6 +35,14 @@ export function HomePage() {
             </button>
           </div>
         </header>
+
+        {editingProfile && profile && (
+          <EditProfileModal
+            profile={profile}
+            onSave={updateProfile}
+            onClose={() => setEditingProfile(false)}
+          />
+        )}
 
         {/* Composer */}
         <TweetComposer onTweetCreated={refetch} />

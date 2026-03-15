@@ -18,21 +18,21 @@ alwaysApply: true
 
 # Reglas de Agente
 1. **Tool & Skill Discovery:** Antes de planificar, revisa tus herramientas y Skills disponibles. Si existe una Skill específica para la tarea (ej. generar migraciones, refactorizar), úsala prioritariamente para asegurar consistencia.
-2. **Verificación:** Crea un test de reproducción antes de arreglar bugs complejos.
+2. **Verificación Delegada:** Delega SIEMPRE la validación de cualquier cambio, feature o bugfix al subagente `qa-engineer`.
 3. **Estilo:** Si el linter falla, corrígelo. No inventes reglas de estilo, sigue la config existente.
 
 # Flujo de Implementación
 El flujo obligatorio de trabajo para cualquier implementación debe ser:
-1. **Diseño y aclaracion de los casos de uso**: Entiende primero el escenario para que te permita crear los casos de prueba.
-2. **Planea la implementación**: Haz el diseño para cumplir con esos casos de prueba.
-3. **Implementación**: Entendiendo los casos de prueba y el plan, implementa lo acordado.
-4. **Verificacion**: Corriendo los tests unitarios que se diseñaron bajo la metodologia TDD.
+1. **Diseño y aclaracion de los casos de uso**: Entiende primero el escenario para tener claros los criterios de aceptación.
+2. **Planea la implementación**: Haz el diseño para cumplir con esos casos de uso.
+3. **Implementación**: Entendiendo los casos de uso y el plan, implementa lo acordado.
+4. **Verificacion**: Invoca al subagente `qa-engineer` (ej: "Usa el subagente qa-engineer para verificar estos casos de prueba: 1. ..., 2. ...") pasándole EXPLÍCITAMENTE los casos de prueba específicos que aplican al feature implementado. Evita pedir que pruebe cosas innecesarias o flujos completos si no aplican. ESPERA su reporte detallado antes de dar la tarea por finalizada.
 
 # Principios de Implementación
 1. **DRY:** No repitas código; abstrae lógica reutilizable.
 2. **Simplicidad primero:** Evita la sobre-ingeniería. La solución más simple suele ser la correcta.
-3. **TDD Pragmatico:** Escribe los tests (o al menos define los casos de prueba) antes de escribir la implementación.
+3. **Testing Delegado:** Concéntrate en la implementación y la definición de los casos de uso. La ejecución de pruebas unitarias y de integración en el navegador es responsabilidad exclusiva del subagente `qa-engineer`.
 
 # Debugging
 
-Cuando se reporte un bug, no empieces a intentar arreglarlo inmediatamente. En su lugar crea un test que reproduzca el bug, y entonces intenta arreglarlo.
+Cuando se reporte un bug, no empieces a intentar arreglarlo inmediatamente. Analiza la causa raíz, planea la solución e impleméntala. Una vez aplicado el fix, delega inmediatamente la verificación al subagente `qa-engineer` para que confirme la resolución del bug y entregue el reporte de QA.
